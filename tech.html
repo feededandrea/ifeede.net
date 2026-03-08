@@ -880,15 +880,18 @@ if(reply) return reply;
 
 
 // mantener tema si existe
-if(lastTopic[user] && topicCounter[user] > 0){
+var chatTopic = detectTopicFromChat(user);
 
-var topic = lastTopic[user];
-var list = contactPersonality[user].topics[topic];
+if(chatTopic && contactPersonality[user] &&
+contactPersonality[user].topics[chatTopic]){
 
-topicCounter[user]--;
+lastTopic[user] = chatTopic;
+topicCounter[user] = 2;
 
-if(list){
+var list = contactPersonality[user].topics[chatTopic];
+
 return pickReply(user,list);
+
 }
 
 }
@@ -1250,6 +1253,52 @@ porque:[
 ]
 
 };
+
+function detectTopicFromChat(name){
+
+var chat = chats[name];
+
+if(!chat || chat.length===0) return null;
+
+var text = chat.join(" ").toLowerCase();
+
+var words = text.split(/\s+/);
+
+var score = {};
+
+for(var i=0;i<words.length;i++){
+
+var w = normalizeWord(words[i].replace(/[^\w]/g,""));
+
+var topic = wordToTopic[w];
+
+if(topic){
+
+if(!score[topic]) score[topic]=0;
+
+score[topic]++;
+
+}
+
+}
+
+var best=null;
+var bestScore=0;
+
+for(var t in score){
+
+if(score[t]>bestScore){
+
+best=t;
+bestScore=score[t];
+
+}
+
+}
+
+return best;
+
+}
 </script>
 
 </body>
