@@ -30,22 +30,6 @@ margin:0;
 font-size:40px;
 }
 
-/* NAV */
-
-.nav{
-background:white;
-padding:10px;
-display:flex;
-justify-content:center;
-gap:20px;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.nav a{
-text-decoration:none;
-color:#0077aa;
-font-weight:bold;
-}
 
 /* CONTENT */
 
