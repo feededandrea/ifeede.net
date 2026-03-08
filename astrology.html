@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>iFeedeNet 2006 - Astrology</title>
+
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="modern.css">
+<link rel="stylesheet" href="legacy.css">
+
+<!-- FontAwesome compatible con Safari 6 -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Trebuchet MS",Arial;
+background:linear-gradient(#8ed6ff,#dff7ff);
+color:#033;
+overflow-x:hidden;
+}
+
+.header{
+background:linear-gradient(#4fd1ff,#0aa0d6);
+padding:30px;
+text-align:center;
+color:white;
+text-shadow:0 0 8px rgba(255,255,255,0.9);
+}
+
+.header h1{
+margin:0;
+font-size:48px;
+}
+
+
+
+.container{
+display:flex;
+gap:20px;
+padding:20px;
+}
+
+.sidebar{
+width:250px;
+}
+
+.box{
+background:white;
+border-radius:5px;
+padding:20px;
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+
+.main{
+flex:1;
+}
+
+.astroGrid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:15px;
+margin-top:10px;
+}
+
+.astroCard{
+background:#f0fbff;
+border-radius:6px;
+padding:15px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,170,255,0.2);
+}
+
+.astroCard h4{
+margin:5px 0;
+}
+
+.retroButton{
+display:inline-block;
+margin-top:10px;
+padding:12px 20px;
+border-radius:20px;
+background:linear-gradient(#7be6ff,#00a6ff);
+color:white;
+font-weight:bold;
+text-decoration:none;
+box-shadow:0 0 10px #7be6ff;
+}
+
+.retroButton:hover{
+box-shadow:0 0 20px #00eaff;
+}
+
+/* ICONOS */
+
+.fa{
+margin-right:6px;
+color:#00a6ff;
+text-shadow:0 0 6px rgba(0,200,255,0.6);
+}
+
+/* ASTRO WIDGETS */
+
+.moonWidget,.compatWidget,.chartWidget{
+background:#f0fbff;
+border-radius:6px;
+padding:15px;
+margin-top:20px;
+box-shadow:0 0 10px rgba(0,170,255,0.25);
+}
+
+.moonIcon{
+font-size:42px;
+text-align:center;
+}
+
+.compatWidget select,
+.compatWidget button{
+margin-top:5px;
+padding:6px;
+font-family:"Trebuchet MS",Arial;
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="starfield"></div>
+
+<div class="header">
+<h1>iFEEDE.NET ASTROLOGY <span class="worldBig"></span></h1>
+<p>Astrología • cartas astrales • energía</p>
+</div>
+
+
+<div class="nav">
+<a href="./index.html"><span class="home"> Home</a>
+<a href="./music.html"><span class="disco">Music</a>
+<a href="./astrology.html"><span class="worldConnected">Astrology</a>
+<a href="./tech.html"><span class="microphone">Tech</a>
+<a href="./links.html"><span class="link"> Links</a>
+</div>
+
+
+<div class="container">
+
+<div class="sidebar box">
+
+<h3><i class="fa fa-star"></i> Mi Signo</h3>
+
+<p><b>☉ Sol:</b> Cáncer</p>
+<p><b>☾ Luna:</b> Virgo</p>
+<p><b>☊ Ascendente:</b> Libra</p>
+<p><b>Intereses:</b> Astrología y relaciones</p>
+
+<hr>
+
+<h3><i class="fa fa-sun-o"></i> Planetas importantes</h3>
+
+<p>☿ Mercurio en Virgo</p>
+<p>♀ Venus en Cáncer</p>
+<p>♄ Saturno en Capricornio</p>
+
+<hr>
+
+<h3><i class="fa fa-magic"></i> Herramientas</h3>
+
+<a class="retroButton" href="https://astro.com" target="_blank">
+<i class="fa fa-globe"></i> Ver carta natal
+</a>
+
+<a class="retroButton" href="https://astro-seek.com" target="_blank">
+<i class="fa fa-star"></i> Astro Seek
+</a>
+
+<hr>
+
+<h3><i class="fa fa-line-chart"></i> Visit Counter</h3>
+
+<div class="counter">0000420</div>
+<div class="clock" id="clock"></div>
+
+</div>
+
+<div class="main box">
+
+<h2>Astrología y energía</h2>
+
+<p>
+La astrología estudia cómo las posiciones de los planetas influyen en la personalidad,
+las emociones y las relaciones entre las personas.
+</p>
+
+<p>
+Me interesa especialmente cómo los tránsitos y las sinastrías afectan los vínculos.
+</p>
+
+<h3 style="margin-top:25px">
+<i class="fa fa-star"></i> Signo Solar: Cáncer
+</h3>
+
+<div class="astroGrid">
+
+<div class="astroCard">
+<h4>Elemento</h4>
+<p>Agua</p>
+</div>
+
+<div class="astroCard">
+<h4>Planeta Regente</h4>
+<p>☾ Luna</p>
+</div>
+
+<div class="astroCard">
+<h4>Energía</h4>
+<p>Emocional, intuitiva</p>
+</div>
+
+<div class="astroCard">
+<h4>Fortalezas</h4>
+<p>Sensibilidad, empatía</p>
+</div>
+
+</div>
+
+<h3 style="margin-top:30px">
+<i class="fa fa-globe"></i> Mi Carta Astral
+</h3>
+
+<p>
+Tengo varios planetas en <b>Capricornio en la casa 11</b>,
+lo que conecta mucho mis metas personales con proyectos
+a largo plazo y comunidades.
+</p>
+
+<p>
+La <b>☾ Luna en Virgo</b> hace que analice mucho
+las emociones y los vínculos.
+</p>
+
+<h3 style="margin-top:30px">
+<i class="fa fa-search"></i> Cosas que me gusta analizar
+</h3>
+
+<ul>
+<li>Sinastría entre personas</li>
+<li>Compatibilidad entre signos</li>
+<li>Tránsitos planetarios</li>
+<li>Energía de las casas</li>
+<li>Relación entre astrología y emociones</li>
+</ul>
+
+<h3 style="margin-top:35px">
+<i class="fa fa-moon-o"></i> Fase Lunar
+</h3>
+
+<div class="moonWidget">
+
+<div class="moonIcon" id="moonIcon">☾</div>
+
+<p style="text-align:center" id="moonText">
+Calculando fase lunar...
+</p>
+
+</div>
+
+<h3 style="margin-top:35px">
+<i class="fa fa-heart"></i> Compatibilidad de Signos
+</h3>
+
+<div class="compatWidget">
+
+<p>Elegí un signo para ver compatibilidad con <b>Cáncer</b></p>
+
+<select id="compatSign">
+<option>Aries</option>
+<option>Tauro</option>
+<option>Géminis</option>
+<option>Cáncer</option>
+<option>Leo</option>
+<option>Virgo</option>
+<option>Libra</option>
+<option>Escorpio</option>
+<option>Sagitario</option>
+<option>Capricornio</option>
+<option>Acuario</option>
+<option>Piscis</option>
+</select>
+
+<button onclick="checkCompat()">Ver compatibilidad</button>
+
+<p id="compatResult" style="margin-top:10px"></p>
+
+</div>
+
+<h3 style="margin-top:35px">
+<i class="fa fa-globe"></i> Mi Posición Planetaria
+</h3>
+
+<div class="chartWidget">
+
+<p>☉ Sol — Cáncer</p>
+<p>☾ Luna — Virgo</p>
+<p>♀ Venus — Cáncer</p>
+<p>☿ Mercurio — Virgo</p>
+<p>♄ Saturno — Capricornio</p>
+
+<p style="font-size:12px;color:#555">
+Carta simplificada estilo blog 2006
+</p>
+
+</div>
+
+<h3>🔮 Juego Zodiacal</h3>
+
+<div class="compatWidget">
+
+<p>Adiviná tu elemento:</p>
+
+<button onclick="guess('fuego')">🔥 Fuego</button>
+<button onclick="guess('tierra')">🌎 Tierra</button>
+<button onclick="guess('aire')">🌬 Aire</button>
+<button onclick="guess('agua')">💧 Agua</button>
+
+<p id="gameResult"></p>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<div class="footer">
+© 2006 iFeedeNet • optimizado para Internet Explorer 6
+</div>
+
+<script>
+
+function updateClock(){
+var now=new Date();
+document.getElementById("clock").innerText=
+now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+
+function checkCompat(){
+
+var sign=document.getElementById("compatSign").value;
+var result=document.getElementById("compatResult");
+
+var good=["Tauro","Virgo","Escorpio","Piscis"];
+var mid=["Cáncer","Capricornio","Libra"];
+
+if(good.indexOf(sign)!==-1)
+result.innerHTML="Compatibilidad alta ★★★★ con "+sign;
+
+else if(mid.indexOf(sign)!==-1)
+result.innerHTML="Compatibilidad media ★★★ con "+sign;
+
+else
+result.innerHTML="Compatibilidad intensa ★★ con "+sign;
+
+}
+
+</script>
+
+
+<script>
+
+function getMoonReal(){
+
+var xhr = new XMLHttpRequest();
+var finished=false;
+
+xhr.onreadystatechange = function(){
+
+if(xhr.readyState == 4){
+
+finished=true;
+
+if(xhr.status == 200){
+
+try{
+
+var data = JSON.parse(xhr.responseText);
+
+if(data && data[0] && data[0].Phase){
+
+document.getElementById("moonText").innerHTML=data[0].Phase;
+
+}
+
+}catch(e){
+
+fallbackMoon();
+
+}
+
+}else{
+
+fallbackMoon();
+
+}
+
+}
+
+};
+
+xhr.open("GET","https://api.farmsense.net/v1/moonphases/?d="+Math.floor(new Date().getTime()/1000),true);
+xhr.send();
+
+setTimeout(function(){
+
+if(!finished){
+
+fallbackMoon();
+
+}
+
+},3000);
+
+}
+
+function fallbackMoon(){
+
+var date = new Date();
+var lp = 2551443;
+var new_moon = new Date(1970,0,7,20,35,0);
+
+var phase = ((date.getTime()-new_moon.getTime())/1000) % lp;
+var index = Math.floor((phase/lp)*8);
+
+var moons=["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"];
+var names=[
+"Luna Nueva",
+"Luna Creciente",
+"Cuarto Creciente",
+"Gibosa Creciente",
+"Luna Llena",
+"Gibosa Menguante",
+"Cuarto Menguante",
+"Luna Menguante"
+];
+
+document.getElementById("moonIcon").innerHTML=moons[index];
+document.getElementById("moonText").innerHTML=names[index]+" (local)";
+
+}
+
+getMoonReal();
+
+</script>
+
+<script>
+
+function createStars(){
+
+for(var i=0;i<120;i++){
+
+var star=document.createElement("div");
+star.className="star";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+
+document.body.appendChild(star);
+
+}
+
+}
+
+createStars();
+
+</script>
+
+<script>
+
+function guess(el){
+
+var correct="agua"; // cancer
+
+var res=document.getElementById("gameResult");
+
+if(el==correct)
+res.innerHTML="✨ Correcto! Cáncer es un signo de AGUA";
+else
+res.innerHTML="❌ No! Cáncer pertenece al elemento Agua";
+
+}
+
+</script>
+
+</body>
+</html>

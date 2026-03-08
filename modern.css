@@ -1,0 +1,39 @@
+body{
+margin:0;
+font-family:"Trebuchet MS",Arial;
+background:linear-gradient(#8ed6ff,#dff7ff);
+color:#033;
+overflow-x:hidden;
+}
+
+/* layout moderno */
+
+.container{
+display:flex;
+gap:20px;
+padding:20px;
+}
+
+.musicGrid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+gap:10px;
+}
+
+.demosGrid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:20px;
+}
+
+.demoCard {
+padding: 22px;
+transition:all 0.2s;
+}
+
+
+.demoCard:hover {
+  -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+
+}

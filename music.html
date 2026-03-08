@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>iFeedeNet 2006 - Música</title>
+
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="modern.css">
+<link rel="stylesheet" href="legacy.css">
+
+<style>
+body{
+  margin:0;
+  font-family:"Trebuchet MS",Arial;
+  background:linear-gradient(#8ed6ff,#dff7ff);
+  color:#033;
+  overflow-x:hidden;
+}
+.header{
+  background:linear-gradient(#4fd1ff,#0aa0d6);
+  padding:30px;
+  text-align:center;
+  color:white;
+  text-shadow:0 0 8px rgba(255,255,255,0.9);
+}
+.header h1{
+  margin:0;
+  font-size:48px;
+}
+
+.container{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+.sidebar{
+  width:250px;
+}
+.box{
+  background:white;
+  border-radius:5px;
+  padding:20px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+.main{
+  flex:1;
+}
+.retroButton{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 20px;
+  border-radius:20px;
+  background:linear-gradient(#7be6ff,#00a6ff);
+  color:white;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:0 0 10px #7be6ff;
+}
+.retroButton:hover{
+  box-shadow:0 0 20px #00eaff;
+}
+/* GRID DE MUSICA */
+.musicGrid, .demosGrid, .ytGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:15px;
+}
+.album, .demoCard, .ytCard{
+  background:#f0fbff;
+  border-radius:6px;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,170,255,0.2);
+}
+.album img, .demoCard img, .ytCard img{
+  width:100%;
+  border-radius:4px;
+  margin-bottom:8px;
+}
+.demoCard audio, .ytCard iframe{
+  width:100%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+<h1>iFEEDE.NET MUSIC <span class="guitarBig"></h1>
+<p>Mis demos, mis canciones favoritas y YouTube Retro</p>
+</div>
+
+<div class="nav">
+<a href="./index.html"><span class="home"> Home</a>
+<a href="./music.html"><span class="disco">Music</a>
+<a href="./astrology.html"><span class="worldConnected">Astrology</a>
+<a href="./tech.html"><span class="microphone">Tech</a>
+<a href="./links.html"><span class="link"> Links</a>
+</div>
+
+<div class="container">
+
+<div class="sidebar box">
+<h3>📟 Controles</h3>
+<a class="retroButton" href="http://192.168.1.36:3456" target="_blank">Abrir YouTube 2009</a>
+<a class="retroButton" href="https://mypage.thesims3.com/mypage/federicojose2000" target="_blank">Abrir Sims 3 Perfil</a>
+<hr>
+<h3>📈 Visit Counter</h3>
+<div class="counter">0000420</div>
+<div class="clock" id="clock"></div>
+</div>
+
+<div class="main box">
+
+<h3>💿 Mis Canciones Favoritas</h3>
+<div class="musicGrid">
+  <div class="album"><img src="./artists/teenagedream.png"><p>Katy Perry</p></div>
+  <div class="album"><img src="./artists/bangerz.jpg"><p>Miley Cyrus</p></div>
+  <div class="album"><img src="./artists/whenthesungoesdonw.jpg"><p>Selena Gomez</p></div>
+  <div class="album"><img src="./artists/blackout.png"><p>Britney Spears</p></div>
+  <div class="album"><img src="./artists/oralfixion.jpg"><p>Shakira</p></div>
+  <div class="album"><img src="./artists/thedutchess.png"><p>Fergie</p></div>
+  <div class="album"><img src="./artists/victoriajustice.jpg"><p>Victoria Justice</p></div>
+</div>
+
+<h3 style="margin-top:30px">🎤 Mis Demos</h3>
+<div class="demosGrid">
+
+<div class="demoCard" data-audio="./discolovedemo.mp3">
+<img src="portada disco love.png">
+<span class="iconoDemos cdBig"></span>
+<p><b>Disco Love</b></p>
+<p>Feede D'Andrea • Demo</p>
+<audio controls><source src="./discolovedemo.mp3" type="audio/mpeg"></audio>
+</div>
+
+<div class="demoCard" data-audio="./bluelightsdemo.wav">
+<img src="feede icon 2.png">
+<span class="iconoDemos cdBig"></span>
+<p><b>Blue Lights</b></p>
+<p>Feede D'Andrea • Demo</p>
+<audio controls><source src="./bluelightsdemo.wav" type="audio/wav"></audio>
+</div>
+
+<div class="demoCard" data-audio="./feedepeligrodemo2.mp3">
+<img src="peligro.png">
+<span class="iconoDemos cdBig"></span>
+<p><b>Peligro</b></p>
+<p>Demo Cover</p>
+<audio controls><source src="./feedepeligrodemo2.mp3" type="audio/mpeg"></audio>
+</div>
+
+<div class="demoCard" data-audio="./oyeagufede.mp3">
+<img src="agufeede.png">
+<span class="iconoDemos cdBig"></span>
+<p><b>Oye</b></p>
+<p>Agu & Feede</p>
+<audio controls><source src="./oyeagufede.mp3" type="audio/mpeg"></audio>
+</div>
+
+</div>
+
+<h3 style="margin-top:30px">📺 Mis Canciones en YouTube</h3>
+<div class="ytGrid">
+
+<div class="ytCard">
+<img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Canción 1">
+<p>Mi Cover 1</p>
+<iframe width="100%" height="150" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div class="ytCard">
+<img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Canción 2">
+<p>Mi Cover 2</p>
+<iframe width="100%" height="150" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<!-- Podés agregar más videos usando el mismo formato -->
+
+</div>
+
+</div> <!-- main -->
+
+</div> <!-- container -->
+
+<div class="footer">
+© 2006 iFeedeNet • optimizado para Internet Explorer 6
+</div>
+
+<script>
+function updateClock(){
+  const now=new Date();
+  document.getElementById("clock").innerText=now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+</script>
+
+</body>
+</html>

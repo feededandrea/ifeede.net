@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>iFeedeNet Tech</title>
+
+
+<link rel="stylesheet" href="base.css">
+
+<!-- CSS fallback para navegadores viejos -->
+<link rel="stylesheet" href="legacy.css">
+
+
+
+<link rel="stylesheet" href="tech.css">
+
+<link rel="javascript" href="tech.js">
+
+
+
+
+<style>
+/* Solo navegadores modernos WebKit y otros leen esto */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  @import url('modern.css');
+}
+</style>
+
+<style>
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>iFEEDE.NET TECH <span class="windowsxp"></h1>
+<p>blog de tecnología • 2006 vibes</p>
+</div>
+
+
+<div class="nav">
+<a href="./index.html"><span class="home"> Home</a>
+<a href="./music.html"><span class="disco">Music</a>
+<a href="./astrology.html"><span class="worldConnected">Astrology</a>
+<a href="./tech.html"><span class="microphone">Tech</a>
+<a href="./links.html"><span class="link"> Links</a>
+</div>
+
+<div class="container">
+
+
+<!-- APPLE -->
+
+<div class="post">
+
+<div class="postTop">
+
+<img class="postImage"
+src="./Macosxpb.png">
+
+<div class="postContent">
+
+<div class="title">Apple Silicon y la visión que terminó dominando la industria</div>
+
+<div class="meta">Posteado por Feede • Apple</div>
+
+<div class="postText">
+
+Apple siempre entendió algo que el resto de la industria tardó décadas en aceptar:  
+cuando el hardware y el software se diseñan juntos el resultado es muchísimo más eficiente.
+
+La visión de Steve Jobs siempre fue controlar la experiencia completa.
+
+Hoy Apple Silicon demuestra que esa estrategia estaba adelantada a su tiempo.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VISTA -->
+
+<div class="post">
+
+<div class="postTop">
+
+<img class="postImage"
+src="./Windows_Vista.png">
+
+<div class="postContent">
+
+<div class="title">Windows Vista: el Windows más incomprendido</div>
+
+<div class="meta">OS Nostalgia</div>
+
+<div class="postText">
+
+Windows Vista es probablemente el sistema operativo más injustamente criticado de la historia.
+
+Internamente es NT 6.0 mientras que Windows 7 es 6.1.
+
+Vista tenía personalidad.
+
+Aero Glass representaba el espíritu Frutiger Aero.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DOMOTICA -->
+
+<div class="post">
+
+<div class="postTop">
+
+<img class="postImage"
+src="homekit.jpg">
+
+<div class="postContent">
+
+<div class="title">Domótica DIY con ESP8266</div>
+
+<div class="meta">Smart Home</div>
+
+<div class="postText">
+
+Gran parte de mi casa está automatizada con ESP8266 y controladores RGB integrados con Homebridge.
+
+Uso tiras LED RGB controladas con transistores TIP122 y firmware propio.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="player">
+<h3>🎵 Dev Music Player</h3>
+
+<audio controls>
+<source src="Disco Love (Demo).mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<div class="player">
+<h3>📺 YouTube 2009 Local</h3>
+<iframe src="http://192.168.1.36:3456"></iframe>
+</div>
+
+
+</div>
+
+<!-- MSN WRAPPER DRAG -->
+
+<div class="msnWrapper" id="msnWrapper">
+
+ 
+
+<div class="msnUsers" id="msnUsers">
+  <div class="user" data-name="Agu"><img src="msnIcons/msn-normal.png"> Agu</div>
+  <div class="user" data-name="Santi"><img src="msnIcons/msn-normal.png"> Santi</div>
+  <div class="user" data-name="Axel"><img src="msnIcons/msn-amarillo.png"> Axel</div>
+  <div class="user" data-name="Caami M"><img src="msnIcons/msn-normal.png"> Caami M</div>
+  <div class="user" data-name="Denu"><img src="msnIcons/msn-ausente.png"> denu.marson@hotmail.com</div>
+  <div class="user" data-name="Chechu"><img src="msnIcons/msn-normal.png"> chechu.dandrea@hotmail.com</div>
+  <div class="user" data-name="Celular"><img src="msnIcons/msn-enespera.png"> celu.dandrea@hotmail.com</div>
+</div>
+
+<div class="chatProfile" id="chatProfile">
+  <img id="chatProfilePhoto" class="chatProfilePhoto" src="msnIcons/user-default.png" alt="Foto">
+  <div class="chatProfileInfo">
+    <div id="chatProfileName" class="chatProfileName">Seleccioná un contacto</div>
+    <div id="chatProfileStatus" class="chatProfileStatus">Estado: sin conexión</div>
+    <div id="chatProfileText" class="chatProfileText">Sin información</div>
+  </div>
+</div>
+
+<div id="chatContainer">
+  <!-- Aquí se van a renderizar los chats -->
+</div>
+
+</div>
+
+
+
+
+
+
+<style>
+.chatWindow.activo{
+  border:2px solid #0094d9;
+  background:#e0f7ff;
+}
+.chatInput input{
+  width:70%;
+}
+.chatInput button{
+  width:25%;
+}
+</style>
+
+
+
+<script>
+
+function send(){
+
+let msg=document.getElementById("msg").value
+let chat=document.getElementById("chat")
+
+if(msg!=""){
+
+chat.innerHTML+="<br><b>Feede:</b> "+msg
+document.getElementById("msg").value=""
+
+}
+
+}
+
+/* DRAG */
+
+let msn=document.getElementById("msnWrapper")
+
+let offsetX=0
+let offsetY=0
+let isDown=false
+
+msn.addEventListener("mousedown",function(e){
+
+isDown=true
+
+offsetX=msn.offsetLeft-e.clientX
+offsetY=msn.offsetTop-e.clientY
+
+})
+
+document.addEventListener("mouseup",function(){
+isDown=false
+})
+
+document.addEventListener("mousemove",function(e){
+
+if(!isDown)return
+
+msn.style.left=(e.clientX+offsetX)+"px"
+msn.style.top=(e.clientY+offsetY)+"px"
+
+msn.style.bottom="auto"
+msn.style.right="auto"
+
+})
+
+</script>
+
+<script>
+// === LISTADO DE ICONOS ===
+var iconMap = {
+  "<3": "<span class='heartSmall'> </span>",
+  ":)": "<span class='smileSmall'> </span>",
+  ":(": "😢",
+  ":D": "😄",
+  ":cd": "<span class='discoSmall'> </span>",
+  ":eyes": "<span class='eyesSmall'> </span>",
+  ":circle": "<span class='circleSmall'> </span>"
+};
+
+// === ENVIAR MENSAJE ===
+function sendMessage(name){
+  var input = document.getElementById("msg_"+name);
+  var msg = input.value.replace(/^\s+|\s+$/g,''); // trim
+  if(msg==="") return;
+
+  // Reemplazar iconos en el mensaje del usuario
+  for(var key in iconMap){
+    var re = new RegExp(key.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g');
+    msg = msg.replace(re, iconMap[key]);
+  }
+
+  chats[name].push("<b>Feede:</b> "+msg);
+  input.value = "";
+  updateChatWindow(name);
+
+  // Respuesta automática con iconos
+  setTimeout(function(){
+    var pair = botReplies[Math.floor(Math.random()*botReplies.length)];
+    var reply = pair[Math.floor(Math.random()*pair.length)];
+
+    for(var key in iconMap){
+      var re = new RegExp(key.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g');
+      reply = reply.replace(re, iconMap[key]);
+    }
+
+    chats[name].push("<b>"+name+":</b> "+reply);
+    updateChatWindow(name);
+  }, 3000);
+}
+</script>
+
+
+<script>
+// === VARIABLES GLOBALES ===
+var users = document.getElementById("msnUsers").getElementsByClassName("user");
+var chatContainer = document.getElementById("chatContainer");
+var chats = {};
+var activeUser = null;
+
+// FICHA SUPERIOR
+var chatProfilePhoto = document.getElementById("chatProfilePhoto");
+var chatProfileName = document.getElementById("chatProfileName");
+var chatProfileStatus = document.getElementById("chatProfileStatus");
+var chatProfileText = document.getElementById("chatProfileText");
+
+// DATOS DE CADA USUARIO
+var contactData = {
+  "Agu": {name:"Agu", photo:"msnIcons/contact-agu.png", status:"Disponible", text:"Escuchando música y probando MSN retro."},
+  "Santi": {name:"Santi", photo:"msnIcons/contact-santi.png", status:"Disponible", text:"Viendo cosas de tecnología."},
+  "Axel": {name:"Axel", photo:"axel.jpg", status:"Ausente", text:"No me molestes."},
+  "Caami M": {name:"Caami M", photo:"cami.jpg", status:"Disponible", text:"Los hombres van y vienen pero el pop es para siempre. <span class='heartSmall'> </span>"},
+  "Denu": {name:"Denu", photo:"denu.JPG", status:"Ausente", text:"A veces si puedo ser un poco racista."},
+  "Chechu": {name:"Chechu", photo:"chechu.JPG", status:"Disponible", text:"Comer Chocolate"},
+  "Celular": {name:"Celes", photo:"celes.JPG", status:"En espera", text:"Conectado desde el teléfono."}
+};
+
+// MENSAJES INICIALES
+var initialMsgs = {
+  "Agu":["<b>Agu:</b> hola fede","<b>Feede:</b> probando msn retro 😄"],
+  "Santi":["<b>Santi:</b> Hey, como va?","<b>Feede:</b> todo bien!"],
+  "Axel":["<b>Axel:</b> que onda","<b>Feede:</b> todo tranqui"],
+  "Caami M":["<b>Caami:</b> hola!","<b>Feede:</b> hola Caami"],
+  "Denu":["<b>Denu:</b> estás online?","<b>Feede:</b> si!"],
+  "Chechu":["<b>Chechu:</b> fede!","<b>Feede:</b> chechu!!"],
+  "Celular":["<b>Celular:</b> llamame","<b>Feede:</b> dale"]
+};
+
+// RESPUESTAS AUTOMÁTICAS
+var botReplies = [
+  ["Holaa!", "Todo bien amigo??"],
+  ["jajajajajjaaj te amoo", "que hacias?"],
+  ["aca ando", "vos?"],
+  ["jajaja mal", "me hiciste reir"],
+  ["estaba escuchando musica", "alto tema sonaba"],
+  ["despues te paso eso", "lo tengo guardado"],
+  ["sii obvio", "de una"],
+  ["ni idea jajaj", "habria que probar"],
+  ["buenisimo", "me encanta esa idea"],
+  ["que nostalgia este msn", "quedo re bueno"],
+  ["ahora vuelvo", "no te vayas"],
+  ["dale despues hablamos", "te escribo en un rato"],
+  ["uh que bueno eso", "contame mas"],
+  ["mal ahi", "igual se puede arreglar"],
+  ["estoy desde la compu", "anda bastante bien"],
+  ["re da para viciar algo hoy", "tenes tiempo despues?"]
+];
+
+// === CREAR CHATS INICIALES ===
+for(var i=0;i<users.length;i++){
+  var name = users[i].getAttribute("data-name");
+  chats[name] = initialMsgs[name] || [];
+
+  var div = document.createElement("div");
+  div.className = "chatWindow";
+  div.setAttribute("data-name", name);
+  div.style.display = "none";
+
+  // Mensajes en un div interno .messages
+  var messagesDiv = document.createElement("div");
+  messagesDiv.className = "messages";
+  messagesDiv.innerHTML = chats[name].join("<br>");
+  div.appendChild(messagesDiv);
+
+  // Input y botón
+  var inputDiv = document.createElement("div");
+  inputDiv.className = "chatInput";
+  inputDiv.innerHTML = '<input id="msg_'+name+'" placeholder="Escribir mensaje"><button class="sendButton" type="button">Enviar</button>';
+  div.appendChild(inputDiv);
+
+  chatContainer.appendChild(div);
+}
+
+// === FUNCIONES PRINCIPALES ===
+function updateProfile(name){
+  var data = contactData[name];
+  if(!data) return;
+  chatProfilePhoto.src = data.photo;
+  chatProfileName.innerHTML = data.name;
+  chatProfileStatus.innerHTML = "Estado: " + data.status;
+  chatProfileText.innerHTML = data.text;
+}
+
+function setActiveUser(name){
+  activeUser = name;
+  var allChats = chatContainer.getElementsByClassName("chatWindow");
+  for(var i=0;i<allChats.length;i++){
+    if(allChats[i].getAttribute("data-name")===name){
+      allChats[i].style.display="block";
+      allChats[i].className="chatWindow activo";
+    } else {
+      allChats[i].style.display="none";
+      allChats[i].className="chatWindow";
+    }
+  }
+  updateProfile(name);
+}
+
+function setActiveList(name){
+  for(var i=0;i<users.length;i++){
+    users[i].className = (users[i].getAttribute("data-name")===name) ? "user activo" : "user";
+  }
+}
+
+// === CLICK EN USUARIO ===
+for(var i=0;i<users.length;i++){
+  users[i].onclick = function(){
+    var name = this.getAttribute("data-name");
+    setActiveUser(name);
+    setActiveList(name);
+  };
+}
+
+
+
+// === ACTUALIZAR CHAT VISUALMENTE ===
+function updateChatWindow(name){
+  var chatDivs = chatContainer.getElementsByClassName("chatWindow");
+  for(var i=0;i<chatDivs.length;i++){
+    if(chatDivs[i].getAttribute("data-name")===name){
+      var chatDiv = chatDivs[i];
+      // Actualizar solo el .messages
+      var messagesDiv = null;
+      // Safari 6 no soporta getElementsByClassName en el elemento, pero sí en document
+      var childNodes = chatDiv.childNodes;
+      for(var j=0;j<childNodes.length;j++){
+        if(childNodes[j].className && childNodes[j].className.indexOf('messages')!==-1){
+          messagesDiv = childNodes[j];
+          break;
+        }
+      }
+      if(messagesDiv){
+        messagesDiv.innerHTML = chats[name].join("<br>");
+        // Scroll al final
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+
+      // Listeners de enter y botón
+      (function(n, chatDivRef){
+        var inputDiv = null, input = null, button = null;
+        var childNodes = chatDivRef.childNodes;
+        for(var k=0;k<childNodes.length;k++){
+          if(childNodes[k].className && childNodes[k].className.indexOf('chatInput')!==-1){
+            inputDiv = childNodes[k];
+            break;
+          }
+        }
+        if(inputDiv){
+          // Para Safari 6, no usar querySelector
+          var inputs = inputDiv.getElementsByTagName('input');
+          var buttons = inputDiv.getElementsByTagName('button');
+          if(inputs.length>0) input = inputs[0];
+          if(buttons.length>0) button = buttons[0];
+        }
+        // Remover listeners previos: no necesario, porque input y button se mantienen.
+        if(input && !input._enterListener){
+          input._enterListener = true;
+          input.onkeydown = function(e){
+            e = e || window.event;
+            var key = e.keyCode || e.which;
+            if(key===13){
+              // efecto pressed
+              if(button){
+                if(button.classList && button.classList.add){
+                  button.classList.add('pressed');
+                } else {
+                  button.className += ' pressed';
+                }
+                setTimeout(function(){
+                  if(button.classList && button.classList.remove){
+                    button.classList.remove('pressed');
+                  } else {
+                    button.className = button.className.replace(' pressed','');
+                  }
+                }, 100);
+              }
+              sendMessage(n);
+              if(e.preventDefault) e.preventDefault();
+              return false;
+            }
+          };
+        }
+        if(button && !button._clickListener){
+          button._clickListener = true;
+          button.onclick = function(){
+            // efecto pressed
+            if(button.classList && button.classList.add){
+              button.classList.add('pressed');
+            } else {
+              button.className += ' pressed';
+            }
+            setTimeout(function(){
+              if(button.classList && button.classList.remove){
+                button.classList.remove('pressed');
+              } else {
+                button.className = button.className.replace(' pressed','');
+              }
+            }, 100);
+            sendMessage(n);
+            return false;
+          };
+        }
+      })(name, chatDiv);
+    }
+  }
+}
+
+// === INICIAR CHAT POR DEFECTO Y listeners iniciales ===
+setActiveUser("Agu");
+setActiveList("Agu");
+// Inicializar listeners Enter y botón para todos los chats
+(function(){
+  var chatDivs = chatContainer.getElementsByClassName("chatWindow");
+  for(var i=0;i<chatDivs.length;i++){
+    var name = chatDivs[i].getAttribute("data-name");
+    updateChatWindow(name);
+  }
+})();
+</script>
+
+<script>
+window.onload = function(){
+
+  var msn = document.getElementById("msnWrapper");
+  var offsetX = 0, offsetY = 0, isDown = false;
+
+  // IMPORTANTE: posición absoluta inicial
+  msn.style.position = 'absolute';
+  msn.style.left = msn.offsetLeft + "px";
+  msn.style.top  = msn.offsetTop + "px";
+
+  // Mousedown
+  msn.onmousedown = function(e){
+    e = e || window.event;
+    isDown = true;
+
+    var left = parseInt(msn.style.left, 10);
+    var top  = parseInt(msn.style.top, 10);
+
+    offsetX = left - (e.clientX || 0);
+    offsetY = top  - (e.clientY || 0);
+
+    // Evitar selección de texto mientras se arrastra
+    if(msn.setCapture) msn.setCapture();
+    document.onselectstart = function(){ return false; };
+  };
+
+  // Mouseup
+  document.onmouseup = function(){
+    isDown = false;
+    if(msn.releaseCapture) msn.releaseCapture();
+    document.onselectstart = null;
+  };
+
+  // Mousemove
+  document.onmousemove = function(e){
+    e = e || window.event;
+    if(!isDown) return;
+
+    msn.style.left = ((e.clientX||0) + offsetX) + "px";
+    msn.style.top  = ((e.clientY||0) + offsetY) + "px";
+
+    msn.style.bottom = "auto";
+    msn.style.right  = "auto";
+  };
+
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<head>
+<meta charset="UTF-8">
+<title>iFeedeNet 2006</title>
+
+<!-- CSS moderno -->
+
+<link rel="stylesheet" href="base.css">
+
+<!-- CSS fallback para navegadores viejos -->
+<link rel="stylesheet" href="legacy.css">
+
+</head>
+
+<body>
+
+<style>
+/* Solo navegadores modernos WebKit y otros leen esto */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  @import url('modern.css');
+}
+</style>
+<!-- burbujas de fondo -->
+<div class="bubble" style="left:10%;animation-duration:18s"></div>
+<div class="bubble" style="left:30%;animation-duration:22s"></div>
+<div class="bubble" style="left:60%;animation-duration:25s"></div>
+<div class="bubble" style="left:80%;animation-duration:20s"></div>
+
+<div class="header">
+<h1>iFEEDE.NET HOME <span class="networkBig"></h1>
+<p>personal homepage • web 2.0 • 2006 vibes ✨</p>
+</div>
+
+<div class="nav">
+<a href="./index.html"><span class="home"> Home</a>
+<a href="./music.html"><span class="disco">Music</a>
+<a href="./astrology.html"><span class="worldConnected">Astrology</a>
+<a href="./tech.html"><span class="microphone">Tech</a>
+<a href="./links.html"><span class="link"> Links</a>
+</div>
+
+<div class="container">
+
+  <div class="sidebar box">
+
+    <div class="msnWidget">
+      <h4><span class="msn"> MSN Contacts</h4>
+      <div class="contact"><img src="msnicons/msn-normal.png"> chechu.dandrea@hotmail.com</div>
+      <div class="contact"><img src="msnicons/msn-amarillo.png"> celu.dandrea@hotmail.com</div>
+      <div class="contact"><img src="msnicons/msn-ausente.png"> Feede</div>
+    </div>
+
+    <div class="msnWidget">
+      <h3 class="titleAboutMe"><span class="man">About Me</h3>
+      <p><b>Nombre:</b> Feede</p>
+      <p><b>Signo:</b> <span class="cancer">  Cáncer</p>
+      <p><b>Pasión:</b>  <span class="microphone"> Cantar</p>
+      <p><b>Nota aguda:</b> <span class="star2">  E5</p>
+      <p><b>Nota grave:</b> <span class="sky"></span>F2  </p>
+      <hr>
+    </div>
+
+    <div class="msnWidget">
+      <h3 style="margin: 5px 3px;"><span class="smile"> Intereses</h3>
+      <ul style="list-style: none; margin: 5px 3px; margin-left: -16px;">
+        <li><span class="music2"> Canto</li>
+        <li><span class="world">  Astrología</li>
+        <li><span class="playerRGB">  LEDs RGB</li>
+        <li><span class="Home">  Domótica ESP8266</li>
+        <li><span class="music"> Música</li>
+        <li><span class="code">  Programación</li>
+        <li><span class="imac">   macOS</li>
+        <li> <span class="windows">Solo Windows Vista</li>
+        <li><span class="sims"> The Sims 3</li>
+      </ul>
+      <hr>
+    </div>
+
+    <h3>📈 Visit Counter</h3>
+    <div class="counter">0000420</div>
+    <div class="clock" id="clock"></div>
+
+  </div> <!-- sidebar -->
+
+  <div class="main box">
+
+    <div class="col-1">
+      <h2><span class="imac"> Bienvenido a mi web retro</h2>
+      <p>Esta es una homepage estilo <b>Web 2.0 / Frutiger Aero</b> como las de los años 2005-2010 ✨</p>
+      <ul style="list-style: none;">
+        <li><span class="microphone"> Covers y canto</li>
+        <li><span class="code"> Casa domotizada con ESP8266</li>
+        <li><span class="playerRGB"> Tiras LED RGB</li>
+        <li><span class="worldConnected">Astrología</li>
+        <li><span class="videos"> Nostalgia de internet viejo</li>
+      </ul>
+    </div>
+
+    <div class="col-2">
+      <h3><span class="neroSmart"> YouTube Retro</h3>
+      <div class="msnWidget">
+        <h4><span class="windowsmediaplayer"> Now Playing</h4>
+        <div class="playerBox" id="ytRetroPlayerContainer">
+          <p style="font-size:12px;color:#666;">Cargando reproductor...</p>
+        </div>
+      </div>
+
+      <!-- ===== BOTONES RETRO AL MISMO NIVEL CON ICONOS PARA SAFARI 6 ===== -->
+      <div class="buttonRow" style="display:flex; gap:10px; flex-wrap:wrap; margin:15px 0;">
+        <a class="retroButton youtube" href="http://192.168.1.36:3456" target="_blank">Abrir YouTube 2009</a>
+        <a class="retroButton sims" href="https://mypage.thesims3.com/mypage/federicojose2000" target="_blank">Abrir Sims 3 Perfil</a>
+      </div>
+
+    </div> <!-- col-2 -->
+  </div>
+
+
+<div class="main box">
+    <!-- ===== Demos EN GRILLA ===== -->
+    <h3><span class="music"> Mis Demos</h3>
+    <div class="demosGrid">
+
+  <div class="demoCard" data-audio="./discolovedemo.mp3">
+    <img src="portada disco love.png" alt="Disco Love">
+    <p><b>Disco Love</b>  <span class="heartSmall"> </span><span class="discoSmall"></p>
+    <p>Feede D'Andrea • Demo</p>
+    <div class="audioContainer"></div>
+    <button class="playAudioBtn">▶ Reproducir</button>
+  </div>
+
+  <div class="demoCard" data-audio="./bluelightsdemo.wav">
+    <img src="feede icon 2.png" alt="Blue Lights">
+    <p><b>Blue Lights</b><span class="circleSmall"></span></p>
+    <p>Feede D'Andrea • Demo</p>
+    <div class="audioContainer"></div>
+    <button class="playAudioBtn">▶ Reproducir</button>
+  </div>
+
+  <div class="demoCard" data-audio="./feedepeligrodemo2.mp3">
+    <img src="peligro.png" alt="Peligro">
+    <p><b>Peligro</b> <span class="cautionSmall"></p>
+    <p>Demo Cover</p>
+    <div class="audioContainer"></div>
+    <button class="playAudioBtn">▶ Reproducir</button>
+  </div>
+
+  <div class="demoCard" data-audio="./oyeagufede.mp3">
+    <img src="agufeede.png" alt="Oye">
+    <p><b>Oye</b> <span class="eyesSmall"></span></p>
+    <p>Agu & Feede</p>
+    <div class="audioContainer"></div>
+    <button class="playAudioBtn">▶ Reproducir</button>
+  </div>
+
+</div>
+
+    <h3><span class="music2"> Artistas favoritas</h3>
+    <div class="musicGrid">
+      <div class="album"><img src="./artists/teenagedream.png"><p>Katy Perry</p></div>
+      <div class="album"><img src="./artists/bangerz.jpg"><p>Miley Cyrus</p></div>
+      <div class="album"><img src="./artists/whenthesungoesdonw.jpg"><p>Selena Gomez</p></div>
+      <div class="album"><img src="./artists/blackout.png"><p>Britney Spears</p></div>
+      <div class="album"><img src="./artists/oralfixion.jpg"><p>Shakira</p></div>
+      <div class="album"><img src="./artists/thedutchess.png"><p>Fergie</p></div>
+      <div class="album"><img src="./artists/victoriajustice.jpg"><p>Victoria Justice</p></div>
+    </div>
+
+    <h3><span class="star"> Datos random</h3>
+    <p>Mi cuarto está lleno de LEDs RGB controlados con transistores TIP122 y ESP8266 conectados a HomeKit 💡</p>
+    <p>También me gusta analizar cartas astrales y cómo influyen en las relaciones 🔮</p>
+
+  </div> <!-- main -->
+
+</div> <!-- container -->
+
+</div>
+
+<div class="footer">
+© 2006 iFeedeNet • optimizado para Internet Explorer 6 🕹
+</div>
+<script>
+window.onload = function() {
+  setTimeout(function() {
+    var container = document.getElementById('ytRetroPlayerContainer');
+    if(!container) return;
+    container.innerHTML = "";
+
+    var video = document.createElement('video');
+    video.width = 300;
+    video.height = 170;
+    video.controls = true;
+    video.autoplay = false;
+    video.preload = "auto";
+
+    var mp4 = document.createElement('source');
+    mp4.src = "http://192.168.1.36:3456/get_video?video_id=F57P9C4SAW4/mp4";
+    mp4.type = "video/mp4";
+
+    var ogg = document.createElement('source');
+    ogg.src = "http://192.168.1.36:3456/assets/F57P9C4SAW4.ogg";
+    ogg.type = "video/ogg";
+
+    video.appendChild(mp4);
+    video.appendChild(ogg);
+
+    container.appendChild(video);
+  }, 5000);
+};
+
+function updateClock(){
+  var now=new Date();
+  document.getElementById("clock").innerHTML=now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+
+
+// JS compatible Safari 6 y botón desaparece
+var buttons = document.getElementsByClassName("playAudioBtn");
+var buttons = document.getElementsByClassName("playAudioBtn");
+
+for(var i=0; i<buttons.length; i++){
+  buttons[i].onclick = function(){
+    var btn = this;
+    var card = btn.parentNode;
+    var audioSrc = card.getAttribute("data-audio");
+
+    // Escapar espacios y caracteres especiales
+    audioSrc = audioSrc.replace(/ /g, "%20");
+
+    // Buscar div audioContainer
+    var children = card.childNodes;
+    var container = null;
+    for(var j=0;j<children.length;j++){
+      if(children[j].className && children[j].className=="audioContainer"){
+        container = children[j];
+        break;
+      }
+    }
+    if(!container) return;
+
+    // Si ya hay audio, no crear otro
+    if(container.getElementsByTagName("audio").length>0) return;
+
+    // Crear audio directamente con src (sin source)
+    var audio = document.createElement("audio");
+    audio.controls = true;
+    audio.src = audioSrc;
+    
+    // Intentar reproducir al click
+    audio.play();
+
+    container.appendChild(audio);
+
+    // Ocultar botón
+    btn.style.display = "none";
+  };
+}
+</script>
+
+</body>
+</html>
