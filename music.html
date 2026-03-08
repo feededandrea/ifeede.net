@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="legacy.css">
 
 <style>
+
+
 body{
   margin:0;
   font-family:"Trebuchet MS",Arial;
@@ -65,7 +67,6 @@ body{
   grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
   gap:15px;
 }
-
 
 audio {
 opacity: 0.6;
@@ -203,6 +204,52 @@ function updateClock(){
 }
 setInterval(updateClock,1000);
 </script>
+
+<script>
+
+window.onload = function(){
+
+var cards = document.getElementsByClassName("demoCard");
+
+for(var i=0;i<cards.length;i++){
+
+var audio = cards[i].getElementsByTagName("audio")[0];
+var cd = cards[i].getElementsByClassName("cdBig")[0];
+
+audio.addEventListener("play",function(){
+
+var parent = this.parentNode;
+var cd = parent.getElementsByClassName("cdBig")[0];
+
+cd.className = "iconoDemos cdBig playing";
+
+});
+
+audio.addEventListener("pause",function(){
+
+var parent = this.parentNode;
+var cd = parent.getElementsByClassName("cdBig")[0];
+
+cd.className = "iconoDemos cdBig";
+
+});
+
+audio.addEventListener("ended",function(){
+
+var parent = this.parentNode;
+var cd = parent.getElementsByClassName("cdBig")[0];
+
+cd.className = "iconoDemos cdBig";
+
+});
+
+}
+
+}
+
+</script>
+
+
 
 </body>
 </html>
