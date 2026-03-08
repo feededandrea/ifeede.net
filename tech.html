@@ -878,8 +878,7 @@ var reply = detectTopicReply(user,msg);
 
 if(reply) return reply;
 
-
-// mantener tema si existe
+// detectar tema desde historial del chat
 var chatTopic = detectTopicFromChat(user);
 
 if(chatTopic && contactPersonality[user] &&
@@ -892,6 +891,18 @@ var list = contactPersonality[user].topics[chatTopic];
 
 return pickReply(user,list);
 
+}
+
+// mantener tema si existe
+if(lastTopic[user] && topicCounter[user] > 0){
+
+var topic = lastTopic[user];
+var list = contactPersonality[user].topics[topic];
+
+topicCounter[user]--;
+
+if(list){
+return pickReply(user,list);
 }
 
 }
