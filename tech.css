@@ -328,7 +328,7 @@ opacity:0.8;
 }
 
 .chatProfile {
-background: #eef7fc;
+background: rgba(239, 247, 252, 0.61);
 border: 1px solid #b7cad8;
 margin: 10px 10px 0 10px;
 padding: 8px 6px;
