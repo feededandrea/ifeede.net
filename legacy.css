@@ -443,6 +443,9 @@ background: -webkit-linear-gradient(top,#1586a1,#0097e8);
   max-width:100%;
   border-radius:4px;
   margin-bottom:5px;
+  left: -3px;
+position: relative;
+border: solid 3px #aabfc9;
 }
 
 /* fallback layout */
@@ -538,10 +541,5 @@ animation-play-state: paused;
 
 
 
-.demoCard:hover {
-  -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-z-index: 3;
-}
 
 }

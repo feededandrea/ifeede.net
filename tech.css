@@ -325,6 +325,11 @@ width: 248px;
 margin-top: -45px;
 min-height: 64px;
 max-height: 64px;
+cursor: default;
+}
+
+#chatContainer {
+cursor: default;
 }
 
 .chatProfilePhoto{

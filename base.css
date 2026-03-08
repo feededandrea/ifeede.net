@@ -313,6 +313,18 @@ animation-play-state: running;
 100%{ transform: rotate(360deg); }
 }
 
+.demoCard.playing {
+  -webkit-transform: scale(1.07);
+    transform: scale(1.07);
+z-index: 3;
+}
+
+
+.demoCard:hover {
+  -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+z-index: 4;
+}
 
 .cdBig {
 display: inline-block;
@@ -332,4 +344,10 @@ animation-play-state: paused;
 .cdBig.playing {
 -webkit-animation-play-state: running !important;
 animation-play-state: running !important;
+}
+
+
+.disabled p, .disabled .cdBig, .disabled audio {
+  pointer-events: none;
+  opacity: 0.3;
 }

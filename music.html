@@ -136,7 +136,7 @@ z-index: 2;
 <h3 style="margin-top:30px">🎤 Mis Demos</h3>
 <div class="demosGrid">
 
-<div class="demoCard" data-audio="./discolovedemo.mp3">
+<div class="demoCard disabled" data-audio="./discolovedemo.mp3">
 <img src="portada disco love.png">
 <span class="iconoDemos cdBig"></span>
 <p><b>Disco Love</b></p>
@@ -144,7 +144,7 @@ z-index: 2;
 <audio controls><source src="./discolovedemo.mp3" type="audio/mpeg"></audio>
 </div>
 
-<div class="demoCard" data-audio="./bluelightsdemo.wav">
+<div class="demoCard disabled" data-audio="./bluelightsdemo.wav">
 <img src="feede icon 2.png">
 <span class="iconoDemos cdBig"></span>
 <p><b>Blue Lights</b></p>
@@ -223,6 +223,8 @@ var cd = parent.getElementsByClassName("cdBig")[0];
 
 cd.className = "iconoDemos cdBig playing";
 
+cd.parentNode.className = "demoCard playing";
+
 });
 
 audio.addEventListener("pause",function(){
@@ -232,6 +234,8 @@ var cd = parent.getElementsByClassName("cdBig")[0];
 
 cd.className = "iconoDemos cdBig";
 
+cd.parentNode.className = "demoCard";
+
 });
 
 audio.addEventListener("ended",function(){
@@ -240,6 +244,8 @@ var parent = this.parentNode;
 var cd = parent.getElementsByClassName("cdBig")[0];
 
 cd.className = "iconoDemos cdBig";
+
+cd.parentNode.className = "demoCard";
 
 });
 

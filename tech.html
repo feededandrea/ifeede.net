@@ -14,7 +14,8 @@
 
 <link rel="stylesheet" href="tech.css">
 
-<link rel="javascript" href="tech.js">
+
+<script src="tech.js"></script>
 
 
 
@@ -177,7 +178,7 @@ Uso tiras LED RGB controladas con transistores TIP122 y firmware propio.
   <div class="user" data-name="Caami M"><img src="msnIcons/msn-normal.png"> Caami M</div>
   <div class="user" data-name="Denu"><img src="msnIcons/msn-ausente.png"> denu.marson@hotmail.com</div>
   <div class="user" data-name="Chechu"><img src="msnIcons/msn-normal.png"> chechu.dandrea@hotmail.com</div>
-  <div class="user" data-name="Celular"><img src="msnIcons/msn-enespera.png"> celu.dandrea@hotmail.com</div>
+  <div class="user" data-name="Celes"><img src="msnIcons/msn-enespera.png"> celu.dandrea@hotmail.com</div>
 </div>
 
 <div class="chatProfile" id="chatProfile">
@@ -281,7 +282,8 @@ var iconMap = {
 // === ENVIAR MENSAJE ===
 function sendMessage(name){
   var input = document.getElementById("msg_"+name);
-  var msg = input.value.replace(/^\s+|\s+$/g,''); // trim
+  var rawMsg = input.value;
+  var msg = rawMsg.replace(/^\s+|\s+$/g,'');
   if(msg==="") return;
 
   // Reemplazar iconos en el mensaje del usuario
@@ -296,8 +298,7 @@ function sendMessage(name){
 
   // Respuesta automática con iconos
   setTimeout(function(){
-    var pair = botReplies[Math.floor(Math.random()*botReplies.length)];
-    var reply = pair[Math.floor(Math.random()*pair.length)];
+    var reply = generateReply(name,rawMsg);
 
     for(var key in iconMap){
       var re = new RegExp(key.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"), 'g');
@@ -312,7 +313,14 @@ function sendMessage(name){
 
 
 <script>
+
+
+
 // === VARIABLES GLOBALES ===
+var lastReply = {};
+var lastTopic = {};
+var topicCounter = {};
+
 var users = document.getElementById("msnUsers").getElementsByClassName("user");
 var chatContainer = document.getElementById("chatContainer");
 var chats = {};
@@ -332,7 +340,7 @@ var contactData = {
   "Caami M": {name:"Caami M", photo:"cami.jpg", status:"Disponible", text:"Los hombres van y vienen pero el pop es para siempre. <span class='heartSmall'> </span>"},
   "Denu": {name:"Denu", photo:"denu.JPG", status:"Ausente", text:"A veces si puedo ser un poco racista."},
   "Chechu": {name:"Chechu", photo:"chechu.JPG", status:"Disponible", text:"Comer Chocolate"},
-  "Celular": {name:"Celes", photo:"celes.JPG", status:"En espera", text:"Conectado desde el teléfono."}
+  "Celes": {name:"Celes", photo:"celes.JPG", status:"En espera", text:"Conectado desde el teléfono."}
 };
 
 // MENSAJES INICIALES
@@ -343,28 +351,368 @@ var initialMsgs = {
   "Caami M":["<b>Caami:</b> hola!","<b>Feede:</b> hola Caami"],
   "Denu":["<b>Denu:</b> estás online?","<b>Feede:</b> si!"],
   "Chechu":["<b>Chechu:</b> fede!","<b>Feede:</b> chechu!!"],
-  "Celular":["<b>Celular:</b> llamame","<b>Feede:</b> dale"]
+  "Celes":["<b>Celes:</b> llamame","<b>Feede:</b> dale"]
 };
 
-// RESPUESTAS AUTOMÁTICAS
 var botReplies = [
-  ["Holaa!", "Todo bien amigo??"],
-  ["jajajajajjaaj te amoo", "que hacias?"],
-  ["aca ando", "vos?"],
-  ["jajaja mal", "me hiciste reir"],
-  ["estaba escuchando musica", "alto tema sonaba"],
-  ["despues te paso eso", "lo tengo guardado"],
-  ["sii obvio", "de una"],
-  ["ni idea jajaj", "habria que probar"],
-  ["buenisimo", "me encanta esa idea"],
-  ["que nostalgia este msn", "quedo re bueno"],
-  ["ahora vuelvo", "no te vayas"],
-  ["dale despues hablamos", "te escribo en un rato"],
-  ["uh que bueno eso", "contame mas"],
-  ["mal ahi", "igual se puede arreglar"],
-  ["estoy desde la compu", "anda bastante bien"],
-  ["re da para viciar algo hoy", "tenes tiempo despues?"]
+
+["Holaa {nick}!", "Hola {nick}!", "Holaa como estas {nick}?", "Hey {nick}!", "Buenas {nick}!"],
+
+["Todo bien {nick}?", "Todo tranqui {nick}", "Todo ok por aca {nick}"],
+
+["jajajajajjaaj te amoo {nick}", "jajaja {nick}", "jajaj mal {nick}"],
+
+["que hacias {nick}?", "que haces {nick}?", "que andabas haciendo {nick}?"],
+
+["aca ando {nick}", "aca estoy {nick}", "recién me conecto {nick}"],
+
+["vos {nick}?", "y vos {nick}?", "vos que contas {nick}?"],
+
+["jajaja mal {nick}", "literal {nick}", "same {nick}", "tal cual {nick}"],
+
+["me hiciste reir {nick}", "jajaj me mataste {nick}"],
+
+["estaba escuchando musica {nick}", "alto tema sonaba {nick}"],
+
+["despues te paso eso {nick}", "lo tengo guardado {nick}"],
+
+["sii obvio {nick}", "obvio {nick}", "de una {nick}"],
+
+["ni idea jajaj {nick}", "ni idea {nick}", "habria que probar {nick}"],
+
+["buenisimo {nick}", "me encanta esa idea {nick}"],
+
+["que nostalgia este msn {nick}", "quedo re bueno {nick}"],
+
+["ahora vuelvo {nick}", "espera {nick}", "ya vuelvo {nick}"],
+
+["dale despues hablamos {nick}", "te escribo en un rato {nick}"],
+
+["uh que bueno eso {nick}", "contame mas {nick}"],
+
+["mal ahi {nick}", "igual se puede arreglar {nick}"],
+
+["anda bastante bien {nick}", "funciona re bien {nick}"],
+
+["re da para viciar algo hoy {nick}", "tenes tiempo despues {nick}?"]
+
 ];
+
+// RESPUESTAS AUTOMÁTICAS
+// RESPUESTAS AUTOMÁTICAS
+var contactPersonality = {
+
+"Agu":{
+
+nickname:"amigo",
+
+topics:{
+
+"tarot":[
+"estaba tirando tarot hoy",
+"me salio una tirada muy fuerte",
+"las cartas estaban re intensas",
+"salio la torre",
+"salio el loco",
+"fue una tirada rarísima",
+"muy energetico todo",
+"me quede pensando en la tirada :eyes"
+],
+
+"energia":[
+"la energia hoy esta rara...",
+"la energia hoy esta hermosaa!! <3",
+"hay algo energetico pasando",
+"se siente medio pesado...",
+"se siente hermoosoo",
+"esta todo movido energeticamente",
+"algo se esta acomodando",
+"viste cuando el ambiente cambia"
+],
+
+"canto":[
+"me dieron ganas de cantar hoy",
+"quiero preparar un show :)",
+"estuve vocalizando :)",
+"estoy practicando",
+"me inspire un poco hoy",
+"me re dieron ganas de cantar"
+]
+
+}
+
+},
+
+"Caami M":{
+
+nickname:"amigoo",
+
+topics:{
+
+"miley":[
+"boludo miley esta increiblee <3",
+"amo demasiado a miley <3",
+"lo nuevo de miley es tremendo :eyes",
+"no puede ser lo que canta",
+"esta en su mejor momento",
+"miley siempre vuelve mejor <3",
+"es demasiado iconica",
+"la amo"
+],
+
+"britney":[
+"britney es eterna <3",
+"toxic sigue siendo un himno",
+"britney cambio todo",
+"nadie supera a britney",
+"me da nostalgia",
+"amo esa epoca"
+],
+
+"katy":[
+"katy perry sigue siendo todo",
+"amo teenage dream <3",
+"esa era era perfecta",
+"katy tiene hits eternos",
+"last friday night es todo",
+"que discazo teenage dream :cd"
+],
+
+"pop":[
+"el pop es superior",
+"necesitamos salir a bailar pop",
+"quiero escuchar pop todo el dia",
+"el pop nunca falla",
+"amo el pop <3",
+"nos falta una noche pop :cd"
+]
+
+}
+
+},
+
+"Chechu":{
+
+nickname:"primito",
+
+topics:{
+
+"familia":[
+"la abuela me pregunto si venias a comer",
+"tenemos que juntarnos",
+"hace banda no nos vemos",
+"hay que hacer un asado",
+"la familia anda preguntando",
+"tenemos que organizar algo"
+],
+
+"milanesas":[
+"el martes hay milanesas en lo de la abuela",
+"no te olvides del martes",
+"milanesas con papas como siempre",
+"la abuela ya dijo que cocina",
+"los martes son sagrados",
+"martes de milanesas"
+],
+
+"video":[
+"estuve editando video hoy",
+"me pase horas editando",
+"estoy con un proyecto de video",
+"termine una produ hoy",
+"estuve renderizando mil horas",
+"editar lleva un monton"
+],
+
+"adobe":[
+"estuve usando premiere",
+"after effects me esta matando",
+"adobe anda pesadisimo",
+"estuve editando en premiere",
+"after effects es un mundo",
+"adobe tiene mil cosas"
+],
+
+"produ":[
+"estoy con una produ",
+"salio un proyecto nuevo",
+"tengo que filmar algo",
+"me llamaron para una produ",
+"estoy armando algo audiovisual"
+]
+
+}
+
+},
+
+"Axel":{
+
+nickname:"amigo",
+
+topics:{
+
+"ariana":[
+"ariana esta increible",
+"amo lo nuevo de ariana",
+"esa voz es una locura",
+"no falla nunca",
+"siempre saca temazos",
+"ariana reina"
+],
+
+"katy":[
+"te acordas cuando fuimos a ver a katy",
+"ese recital fue todo",
+"la rompió esa noche",
+"que buen show",
+"me acuerdo perfecto"
+],
+
+"hombres":[
+"hay hombres muy lindos ultimamente",
+"vi uno tremendo hoy",
+"no te puedo explicar",
+"era demasiado lindo",
+"casi me muero",
+"me quede mirando"
+]
+
+}
+
+},
+
+"Celes":{
+
+nickname:"hermano",
+
+topics:{
+
+"trabajo":[
+"estoy con mil cosas del trabajo",
+"no paro hoy",
+"mucho laburo",
+"estoy a full",
+"todo muy movido hoy"
+],
+
+"tienda":[
+"tienda nube esta explotando",
+"tienda nube no para de crecer",
+"estoy con cosas de tienda nube",
+"hay mil proyectos en tienda nube",
+"todo muy movido ahi"
+],
+
+"rrpp":[
+"ser rrpp es un mundo",
+"me hablan todo el dia",
+"rrpp es manejar muchas cosas",
+"todo pasa por comunicacion",
+"hay que cuidar la imagen"
+],
+
+"crisis":[
+"hoy vimos una crisis de imagen",
+"una marca esta en problemas",
+"las crisis de comunicacion son tremendas",
+"hay empresas que no saben reaccionar",
+"manejar crisis es dificil"
+],
+
+"ornella":[
+"ornella hizo algo buenisimo",
+"ornella me conto algo tremendo",
+"ornella esta a full",
+"ornella esta re bien",
+"despues te cuento algo de ornella"
+]
+
+}
+
+},
+
+"Denu":{
+
+nickname:"amigo",
+
+topics:{
+
+"airbag":[
+"amo airbag",
+"estoy escuchando airbag",
+"airbag es demasiado bueno",
+"siempre vuelvo a airbag",
+"que banda airbag",
+"me puse airbag otra vez",
+"no me canso de airbag",
+"temazos todos"
+],
+
+"miley":[
+"miley esta increible",
+"amo miley",
+"lo nuevo de miley es tremendo",
+"miley siempre reinventa todo",
+"miley tiene temazos",
+"no falla miley",
+"esta en su mejor momento",
+"la amo"
+],
+
+"canto":[
+"empece canto en la academia",
+"me gusta mucho cantar",
+"la academia esta buenisima",
+"estoy aprendiendo mucho canto",
+"cantar me re gusta",
+"estoy practicando bastante",
+"me esta gustando mucho",
+"voy mejorando"
+],
+
+"birra":[
+"ayer fue la anecdota mas birraza",
+"nos re fuimos al pasto ayer",
+"terminamos tomando un monton",
+"fue tremenda noche",
+"no me acuerdo de la mitad",
+"terminamos re tarde",
+"alto desastre",
+"pero estuvo buenisimo"
+]
+
+}
+
+}
+
+};
+
+
+var wordToTopic = {
+
+"abuela":"familia",
+"familia":"familia",
+"prima":"familia",
+"primo":"familia",
+"tio":"familia",
+"tia":"familia",
+
+"asado":"asado",
+"parrilla":"asado",
+"carne":"asado",
+
+"editar":"edicion",
+"editing":"edicion",
+"premiere":"edicion",
+"video":"edicion",
+"render":"edicion",
+"renderizando":"edicion",
+
+"katy":"katy",
+"ariana":"ariana",
+"miley":"miley"
+
+};
 
 // === CREAR CHATS INICIALES ===
 for(var i=0;i<users.length;i++){
@@ -432,6 +780,153 @@ for(var i=0;i<users.length;i++){
 }
 
 
+function detectTopicReply(user,msg){
+
+var topics = detectTopics(msg);
+
+if(topics.length === 0) return null;
+
+var replies = [];
+
+for(var i=0;i<topics.length;i++){
+
+var topic = topics[i];
+
+if(contactPersonality[user] &&
+contactPersonality[user].topics[topic]){
+
+var list = contactPersonality[user].topics[topic];
+
+replies.push(pickReply(user,list));
+
+}
+
+}
+
+if(replies.length === 0) return null;
+
+return replies.join(" ");
+}
+
+function normalizeWord(w){
+
+w = w.toLowerCase();
+
+w = w.replace(/(.)\1+/g,"$1"); 
+// holaaaa -> hola
+
+return w;
+
+}
+
+
+var recentReplies = {};
+var RECENT_LIMIT = 12;
+
+
+function generateReply(user,msg){
+
+  var question = detectQuestion(msg);
+
+if(question){
+
+var list = questionReplies[question];
+
+if(list){
+return pickReply(user,list);
+}
+
+}
+
+// detectar saludo
+var greeting = detectGreeting(msg);
+
+if(greeting){
+
+var nick = "";
+
+if(contactPersonality[user]){
+nick = contactPersonality[user].nickname;
+}
+
+return greeting + " " + nick;
+
+}
+
+// detectar topic
+var reply = detectTopicReply(user,msg);
+
+if(reply) return reply;
+
+
+// mantener tema si existe
+if(lastTopic[user] && topicCounter[user] > 0){
+
+var topic = lastTopic[user];
+var list = contactPersonality[user].topics[topic];
+
+topicCounter[user]--;
+
+if(list){
+return pickReply(user,list);
+}
+
+}
+
+
+// 60% respuestas propias
+if(contactPersonality[user] && Math.random() < 0.6){
+
+var topics = contactPersonality[user].topics;
+
+var keys = [];
+
+for(var k in topics){
+keys.push(k);
+}
+
+keys.sort(function(){ return 0.5 - Math.random(); });
+
+for(var i=0;i<keys.length;i++){
+
+var key = keys[i];
+var list = topics[key];
+
+if(list && list.length){
+return pickReply(user,list);
+}
+
+}
+
+}
+
+
+// fallback generico
+var pair = botReplies[Math.floor(Math.random()*botReplies.length)];
+
+var reply = pickReply(user,pair);
+
+if(contactPersonality[user]){
+
+var nick = contactPersonality[user].nickname;
+
+reply = reply.replace(/{nick}/g,nick);
+
+}
+
+return reply;
+
+}
+
+function scrollChatToBottom(messagesDiv){
+
+setTimeout(function(){
+
+messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+},10);
+
+}
 
 // === ACTUALIZAR CHAT VISUALMENTE ===
 function updateChatWindow(name){
@@ -450,9 +945,11 @@ function updateChatWindow(name){
         }
       }
       if(messagesDiv){
-        messagesDiv.innerHTML = chats[name].join("<br>");
-        // Scroll al final
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+      messagesDiv.innerHTML = chats[name].join("<br>");
+
+      scrollChatToBottom(messagesDiv);
+
       }
 
       // Listeners de enter y botón
@@ -583,6 +1080,153 @@ window.onload = function(){
     msn.style.bottom = "auto";
     msn.style.right  = "auto";
   };
+
+};
+
+function pickReply(user,list){
+
+if(!recentReplies[user]) recentReplies[user] = [];
+
+var history = recentReplies[user];
+
+// filtrar frases usadas recientemente
+var filtered = [];
+
+for(var i=0;i<list.length;i++){
+
+if(history.indexOf(list[i]) === -1){
+filtered.push(list[i]);
+}
+
+}
+
+// si todas se usaron, permitir repetir
+if(filtered.length === 0){
+filtered = list;
+}
+
+var reply = filtered[Math.floor(Math.random()*filtered.length)];
+
+// guardar en historial
+history.push(reply);
+
+if(history.length > RECENT_LIMIT){
+history.shift();
+}
+
+return reply;
+
+}
+
+function detectGreeting(msg){
+
+msg = msg.toLowerCase();
+
+var match = msg.match(/hola(a+)/);
+
+if(match){
+return "hola" + match[1];
+}
+
+if(msg.indexOf("hola") !== -1){
+return "hola";
+}
+
+var other = [
+"buenas",
+"hey",
+"ey",
+"que onda",
+"q onda",
+"holi"
+];
+
+for(var i=0;i<other.length;i++){
+
+if(msg.indexOf(other[i]) !== -1){
+return other[i];
+}
+
+}
+
+return null;
+
+}
+
+
+function detectTopics(msg){
+
+msg = msg.toLowerCase();
+
+var words = msg.split(/\s+/);
+
+var topics = [];
+
+for(var i=0;i<words.length;i++){
+
+var w = normalizeWord(words[i].replace(/[^\w]/g,""));
+
+var topic = wordToTopic[w];
+
+if(topic && topics.indexOf(topic) === -1){
+topics.push(topic);
+}
+
+}
+
+return topics;
+
+}
+
+
+
+function detectQuestion(msg){
+
+msg = msg.toLowerCase();
+
+if(msg.includes("que ") || msg === "que") return "que";
+if(msg.includes("cual")) return "cual";
+if(msg.includes("donde")) return "donde";
+if(msg.includes("cuando")) return "cuando";
+if(msg.includes("por que") || msg.includes("porque")) return "porque";
+
+return null;
+
+}
+
+var questionReplies = {
+
+que:[
+"nada especial",
+"cosas de siempre",
+"un poco de todo",
+"cosas del laburo"
+],
+
+cual:[
+"varias cosas",
+"de todo un poco",
+"despues te paso",
+"unas playlist que tenia"
+],
+
+donde:[
+"por aca cerca",
+"en casa",
+"andando por ahi"
+],
+
+cuando:[
+"hace un rato",
+"recién",
+"antes"
+],
+
+porque:[
+"ni idea jajaj",
+"cosas que pasan",
+"porque pintó"
+]
 
 };
 </script>
