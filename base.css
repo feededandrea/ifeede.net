@@ -293,3 +293,43 @@ margin-top:10px;
 .titleAboutMe {
 margin: -6px -3px;
 }
+
+
+
+.cdBig.playing{
+-webkit-animation-play-state: running;
+animation-play-state: running;
+}
+
+/* keyframes */
+
+@-webkit-keyframes girarCD{
+0%{ -webkit-transform: rotate(0deg); }
+100%{ -webkit-transform: rotate(360deg); }
+}
+
+@keyframes girarCD{
+0%{ transform: rotate(0deg); }
+100%{ transform: rotate(360deg); }
+}
+
+
+.cdBig {
+display: inline-block;
+width: 120px;
+height: 116px;
+-webkit-animation-name: girarCD;
+-webkit-animation-duration: 3s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-timing-function: linear;
+-webkit-animation-play-state: paused;
+animation-name: girarCD;
+animation-duration: 3s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+animation-play-state: paused;
+}
+.cdBig.playing {
+-webkit-animation-play-state: running !important;
+animation-play-state: running !important;
+}
