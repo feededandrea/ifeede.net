@@ -37,3 +37,14 @@ transition:all 0.2s;
     transform: scale(1.1);
 
 }
+
+/* animacion de cd girando */
+
+@keyframes cdspin{
+from{ transform:rotate(0deg); }
+to{ transform:rotate(360deg); }
+}
+
+.cdBig.playing{
+animation: cdspin 2s linear infinite;
+}

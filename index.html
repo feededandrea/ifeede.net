@@ -121,6 +121,7 @@
 
   <div class="demoCard" data-audio="./discolovedemo.mp3">
     <img src="portada disco love.png" alt="Disco Love">
+    <span class="iconoDemos cdBig"></span>
     <p><b>Disco Love</b>  <span class="heartSmall"> </span><span class="discoSmall"></p>
     <p>Feede D'Andrea • Demo</p>
     <div class="audioContainer"></div>
@@ -129,6 +130,7 @@
 
   <div class="demoCard" data-audio="./bluelightsdemo.wav">
     <img src="feede icon 2.png" alt="Blue Lights">
+    <span class="iconoDemos cdBig"></span>
     <p><b>Blue Lights</b><span class="circleSmall"></span></p>
     <p>Feede D'Andrea • Demo</p>
     <div class="audioContainer"></div>
@@ -137,6 +139,7 @@
 
   <div class="demoCard" data-audio="./feedepeligrodemo2.mp3">
     <img src="peligro.png" alt="Peligro">
+    <span class="iconoDemos cdBig"></span>
     <p><b>Peligro</b> <span class="cautionSmall"></p>
     <p>Demo Cover</p>
     <div class="audioContainer"></div>
@@ -145,6 +148,7 @@
 
   <div class="demoCard" data-audio="./oyeagufede.mp3">
     <img src="agufeede.png" alt="Oye">
+    <span class="iconoDemos cdBig"></span>
     <p><b>Oye</b> <span class="eyesSmall"></span></p>
     <p>Agu & Feede</p>
     <div class="audioContainer"></div>
@@ -248,6 +252,34 @@ for(var i=0; i<buttons.length; i++){
     // Intentar reproducir al click
     audio.play();
 
+    var cards = document.getElementsByClassName("demoCard");
+
+var cd = card.getElementsByClassName("cdBig")[0];
+
+
+audio.addEventListener("play",function(){
+
+cd.className = "iconoDemos cdBig playing";
+card.className = "demoCard playing";
+
+});
+
+audio.addEventListener("pause",function(){
+
+cd.className = "iconoDemos cdBig";
+card.className = "demoCard";
+
+});
+
+audio.addEventListener("ended",function(){
+
+cd.className = "iconoDemos cdBig";
+card.className = "demoCard";
+
+});
+
+
+
     container.appendChild(audio);
 
     // Ocultar botón
@@ -255,6 +287,18 @@ for(var i=0; i<buttons.length; i++){
   };
 }
 </script>
+
+
+
+<script>
+
+window.onload = function(){
+
+
+}
+
+</script>
+
 
 </body>
 </html>

@@ -237,12 +237,14 @@ vertical-align:top;
 -webkit-box-shadow:0 0 10px rgba(0,170,255,0.4);
 box-shadow:0 0 10px rgba(0,170,255,0.4);
 border:1px solid #a8e7ff;
+z-index: 2;
 }
 
 .demoCard img{
 width:100%;
 border-radius:6px;
 margin-bottom:8px;
+z-index: 1;
 }
 
 /* POP ARTISTS */
