@@ -220,6 +220,21 @@ background: -webkit-linear-gradient(top,#1586a1,#0097e8);
   height: 120px;
   }
 
+ .nightSkyBig::before {
+  content: ""; /* Necesario para pseudo-elementos */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+
+  /* Imagen como fondo */
+  background-image: url('./icons_og_size/nightsky.png');
+  background-size: contain; /* Ajusta el tamaño manteniendo proporción */
+  background-repeat: no-repeat;
+  
+  width: 120px;  /* o max-width: 30px; */
+  height: 120px;
+  }
+
    .guitarBig::before {
   content: ""; /* Necesario para pseudo-elementos */
   display: inline-block;
