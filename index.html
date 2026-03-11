@@ -191,6 +191,7 @@
 © 2006 iFeedeNet • optimizado para Internet Explorer 6 🕹
 </div>
 <script>
+
 window.onload = function() {
   setTimeout(function() {
     var container = document.getElementById('ytRetroPlayerContainer');
@@ -205,11 +206,11 @@ window.onload = function() {
     video.preload = "auto";
 
     var mp4 = document.createElement('source');
-    mp4.src = "http://192.168.1.36:3456/get_video?video_id=F57P9C4SAW4/mp4";
+    mp4.src = "https://armed-san-advertiser-makeup.trycloudflare.com/get_video?video_id=F57P9C4SAW4/mp4";
     mp4.type = "video/mp4";
 
     var ogg = document.createElement('source');
-    ogg.src = "http://192.168.1.36:3456/assets/F57P9C4SAW4.ogg";
+    ogg.src = "https://armed-san-advertiser-makeup.trycloudflare.com/assets/F57P9C4SAW4.ogg";
     ogg.type = "video/ogg";
 
     video.appendChild(mp4);
