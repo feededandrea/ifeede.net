@@ -128,7 +128,7 @@
     <button class="playAudioBtn">▶ Reproducir</button>
   </div>
 
-  <div class="demoCard disabled" data-audio="./bluelightsdemo.wav">
+  <div class="demoCard disabled" data-audio="./bluelightsdemo.mp3">
     <img src="feede icon 2.png" alt="Blue Lights">
     <span class="iconoDemos cdBig"></span>
     <p><b>Blue Lights</b><span class="circleSmall"></span></p>
@@ -146,7 +146,7 @@
     <button class="playAudioBtn">▶ Reproducir</button>
   </div>
 
-    <div class="demoCard" data-audio="./loveyoulikealovesongdemoig.m4a">
+    <div class="demoCard" data-audio="./loveyoulikealovesongdemoig.mp3">
     <img src="loveyou.png" alt="Love You Like A Love Song">
     <span class="iconoDemos cdBig"></span>
     <p><b>Love You Like A Love Song</b> <span class="heartSmall"></span></p>
@@ -232,43 +232,34 @@ setInterval(updateClock,1000);
 
 // JS compatible Safari 6 y botón desaparece
 var buttons = document.getElementsByClassName("playAudioBtn");
-var buttons = document.getElementsByClassName("playAudioBtn");
 
 for(var i=0; i<buttons.length; i++){
   buttons[i].onclick = function(){
+
     var btn = this;
     var card = btn.parentNode;
     var audioSrc = card.getAttribute("data-audio");
 
-    // Escapar espacios y caracteres especiales
-    audioSrc = audioSrc.replace(/ /g, "%20");
+    audioSrc = audioSrc.replace(/ /g,"%20");
 
-    // Buscar div audioContainer
-    var children = card.childNodes;
-    var container = null;
-    for(var j=0;j<children.length;j++){
-      if(children[j].className && children[j].className=="audioContainer"){
-        container = children[j];
-        break;
-      }
-    }
+    // buscar contenedor (forma compatible)
+    var container = card.getElementsByClassName("audioContainer")[0];
     if(!container) return;
 
-    // Si ya hay audio, no crear otro
     if(container.getElementsByTagName("audio").length>0) return;
 
-    // Crear audio directamente con src (sin source)
     var audio = document.createElement("audio");
     audio.controls = true;
     audio.src = audioSrc;
-    
-    // Intentar reproducir al click
+
+    audio.load();
     audio.play();
 
-    var cards = document.getElementsByClassName("demoCard");
+    container.appendChild(audio);
 
-var cd = card.getElementsByClassName("cdBig")[0];
+    btn.style.display = "none";
 
+    var cd = card.getElementsByClassName("cdBig")[0];
 
 audio.addEventListener("play",function(){
 
