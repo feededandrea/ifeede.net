@@ -193,6 +193,7 @@
 <script>
 
 window.onload = function() {
+
   setTimeout(function() {
     var container = document.getElementById('ytRetroPlayerContainer');
     if(!container) return;
@@ -206,11 +207,11 @@ window.onload = function() {
     video.preload = "auto";
 
     var mp4 = document.createElement('source');
-    mp4.src = "https://armed-san-advertiser-makeup.trycloudflare.com/get_video?video_id=F57P9C4SAW4/mp4";
+    mp4.src = "https://sources-percent-notifications-americas.trycloudflare.com/get_video?video_id=F57P9C4SAW4/mp4";
     mp4.type = "video/mp4";
 
     var ogg = document.createElement('source');
-    ogg.src = "https://armed-san-advertiser-makeup.trycloudflare.com/assets/F57P9C4SAW4.ogg";
+    ogg.src = "https://sources-percent-notifications-americas.trycloudflare.com/assets/F57P9C4SAW4.ogg";
     ogg.type = "video/ogg";
 
     video.appendChild(mp4);
@@ -218,12 +219,14 @@ window.onload = function() {
 
     container.appendChild(video);
   }, 5000);
+
 };
 
 function updateClock(){
   var now=new Date();
   document.getElementById("clock").innerHTML=now.toLocaleTimeString();
 }
+
 setInterval(updateClock,1000);
 
 
