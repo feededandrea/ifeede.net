@@ -515,6 +515,13 @@ nickname:"primito",
 
 topics:{
 
+"ayuda":[
+"vos siempre cualquier pelotudez o duda q tengas lo buscas en Yahoo Respuestas q siempre hay algun boludo q preguntó lo mismo",
+"en youtube hay tutoriales para todo tmb",
+"le podes preguntar a tu tia si para el sabado me puede prestar la camara??",
+"hay un chileno que hace unos videos muy graciosos es un estallo",
+],
+
 "familia":[
 "la abuela me pregunto si venias a comer",
 "tenemos que juntarnos",
@@ -524,8 +531,18 @@ topics:{
 "tenemos que organizar algo"
 ],
 
+"comer":[
+"el martes hay milanesas en lo de la abuela",
+"no te olvides del martes",
+"milanesas con papas como siempre",
+"la abuela ya dijo que cocina",
+"los martes son sagrados",
+"martes de milanesas"
+],
+
 "milanesas":[
 "el martes hay milanesas en lo de la abuela",
+"ADRIANAAAA",
 "no te olvides del martes",
 "milanesas con papas como siempre",
 "la abuela ya dijo que cocina",
@@ -710,6 +727,19 @@ topics:{
 
 var wordToTopic = {
 
+
+
+"ayudes":"ayuda",
+"ayudas":"ayuda",
+"ayuda":"ayuda",
+"ayudar":"ayuda",
+
+"comer":"familia",
+
+"premiere":"ayuda",
+"after":"ayuda",
+
+"milanesas":"familia",
 "abuela":"familia",
 "familia":"familia",
 "prima":"familia",
@@ -846,7 +876,27 @@ var RECENT_LIMIT = 12;
 
 function generateReply(user,msg){
 
-  var question = detectQuestion(msg);
+msg = msg || "";
+
+
+// 1️⃣ DETECTAR TÓPICOS (PRIORIDAD ABSOLUTA)
+
+var topicReply = detectTopicReply(user,msg);
+
+if(topicReply){
+
+lastTopic[user] = detectTopics(msg)[0];
+topicCounter[user] = 2;
+
+return topicReply;
+
+}
+
+
+
+// 2️⃣ DETECTAR PREGUNTAS
+
+var question = detectQuestion(msg);
 
 if(question){
 
@@ -858,7 +908,10 @@ return pickReply(user,list);
 
 }
 
-// detectar saludo
+
+
+// 3️⃣ DETECTAR SALUDO
+
 var greeting = detectGreeting(msg);
 
 if(greeting){
@@ -873,69 +926,31 @@ return greeting + " " + nick;
 
 }
 
-// detectar topic
-var reply = detectTopicReply(user,msg);
 
-if(reply) return reply;
 
-// detectar tema desde historial del chat
-var chatTopic = detectTopicFromChat(user);
+// 4️⃣ CONTINUAR TEMA ANTERIOR
 
-if(chatTopic && contactPersonality[user] &&
-contactPersonality[user].topics[chatTopic]){
-
-lastTopic[user] = chatTopic;
-topicCounter[user] = 2;
-
-var list = contactPersonality[user].topics[chatTopic];
-
-return pickReply(user,list);
-
-}
-
-// mantener tema si existe
 if(lastTopic[user] && topicCounter[user] > 0){
 
 var topic = lastTopic[user];
+
+if(contactPersonality[user] &&
+contactPersonality[user].topics[topic]){
+
 var list = contactPersonality[user].topics[topic];
 
 topicCounter[user]--;
 
-if(list){
 return pickReply(user,list);
-}
-
-}
-
-
-// 60% respuestas propias
-if(contactPersonality[user] && Math.random() < 0.6){
-
-var topics = contactPersonality[user].topics;
-
-var keys = [];
-
-for(var k in topics){
-keys.push(k);
-}
-
-keys.sort(function(){ return 0.5 - Math.random(); });
-
-for(var i=0;i<keys.length;i++){
-
-var key = keys[i];
-var list = topics[key];
-
-if(list && list.length){
-return pickReply(user,list);
-}
 
 }
 
 }
 
 
-// fallback generico
+
+// 5️⃣ RESPUESTAS GENERICAS SOLO SI NO HAY TEMA
+
 var pair = botReplies[Math.floor(Math.random()*botReplies.length)];
 
 var reply = pickReply(user,pair);
