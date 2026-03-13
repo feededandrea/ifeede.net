@@ -297,7 +297,15 @@ function sendMessage(name){
   updateChatWindow(name);
 
   // Respuesta automática con iconos
-  setTimeout(function(){
+  var status = contactData[name].status;
+
+  var delayRange = statusTypes[status].delay;
+
+  var delay = Math.floor(
+    delayRange[0] + Math.random()*(delayRange[1]-delayRange[0])
+  );
+
+setTimeout(function(){
     var reply = generateReply(name,rawMsg);
 
     for(var key in iconMap){
@@ -307,7 +315,7 @@ function sendMessage(name){
 
     chats[name].push("<b>"+name+":</b> "+reply);
     updateChatWindow(name);
-  }, 3000);
+  }, delay);
 }
 </script>
 
@@ -1325,6 +1333,97 @@ bestScore=score[t];
 return best;
 
 }
+
+
+// ===============================
+// SISTEMA DE ESTADOS DINÁMICOS
+// ===============================
+
+var statusTypes = {
+
+  "Disponible":{
+    icon:"msnIcons/msn-normal.png",
+    delay:[2000,4000]
+  },
+
+  "Ausente":{
+    icon:"msnIcons/msn-ausente.png",
+    delay:[8000,20000]
+  },
+
+  "En espera":{
+    icon:"msnIcons/msn-enespera.png",
+    delay:[5000,12000]
+  },
+
+  "Ocupado":{
+    icon:"msnIcons/msn-ocupado.png",
+    delay:[15000,40000]
+  }
+
+};
+
+// obtener icono del usuario
+function updateUserIcon(name,status){
+
+  var users = document.getElementById("msnUsers").getElementsByClassName("user");
+
+  for(var i=0;i<users.length;i++){
+
+    if(users[i].getAttribute("data-name")===name){
+
+      var img = users[i].getElementsByTagName("img")[0];
+
+      img.src = statusTypes[status].icon;
+
+    }
+
+  }
+
+}
+
+// cambiar estado de un usuario
+function changeUserStatus(name){
+
+  var states = Object.keys(statusTypes);
+
+  var newState = states[Math.floor(Math.random()*states.length)];
+
+  contactData[name].status = newState;
+
+  updateUserIcon(name,newState);
+
+  if(activeUser===name){
+    updateProfile(name);
+  }
+
+}
+
+// cambiar estados lentamente
+function randomStatusChange(){
+
+  var names = Object.keys(contactData);
+
+  // cambiar 1 o 2 usuarios
+  var changes = 1 + Math.floor(Math.random()*2);
+
+  for(var i=0;i<changes;i++){
+
+    var name = names[Math.floor(Math.random()*names.length)];
+
+    // menor probabilidad si estás hablando con él
+    if(name===activeUser && Math.random()<0.7) continue;
+
+    changeUserStatus(name);
+
+  }
+
+}
+
+// ejecutar cada 4 minutos
+setInterval(randomStatusChange,240000);
+
+
 </script>
 
 </body>
